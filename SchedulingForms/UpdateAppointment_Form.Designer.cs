@@ -52,7 +52,7 @@
             // 
             // cancel_Button
             // 
-            this.cancel_Button.Location = new System.Drawing.Point(16, 212);
+            this.cancel_Button.Location = new System.Drawing.Point(15, 215);
             this.cancel_Button.Margin = new System.Windows.Forms.Padding(4);
             this.cancel_Button.Name = "cancel_Button";
             this.cancel_Button.Size = new System.Drawing.Size(75, 40);
@@ -63,7 +63,7 @@
             // 
             // save_Button
             // 
-            this.save_Button.Location = new System.Drawing.Point(289, 212);
+            this.save_Button.Location = new System.Drawing.Point(290, 215);
             this.save_Button.Margin = new System.Windows.Forms.Padding(4);
             this.save_Button.Name = "save_Button";
             this.save_Button.Size = new System.Drawing.Size(75, 40);
@@ -227,7 +227,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(808, 290);
+            this.ClientSize = new System.Drawing.Size(824, 291);
             this.Controls.Add(this.end_TimePicker);
             this.Controls.Add(this.start_TimePicker);
             this.Controls.Add(this.label6);

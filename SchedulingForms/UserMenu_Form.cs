@@ -105,9 +105,6 @@ namespace SchedulingForms
 
         private void updateAppointment_Form_SaveClicked(object sender, EventArgs e)
         {
-            //
-            //
-            //
             ChangeTimeZone();
             this.Enabled = true;
         }
@@ -311,19 +308,21 @@ namespace SchedulingForms
 
             if (all_Radio.Checked)
             {
-                
                 //Lambda reduces the amount of code that is needed (replaces several LINQ queries).
                 var allQuery = ent.appointments.Where(ap => ap.userId == ActiveUser.userId);
 
                 //Lambda allows for code reuse (replaces several nearly identical foreach loops)
                 ForEachListItem(allQuery, ap => userAppointments.Add(ap));
+
                 ChangeTimeZone();
             }
             else if (week_Radio.Checked)
             {
+                
                 var weekQuery = ent.appointments
                      .Where(ap => ap.userId == ActiveUser.userId)
                      .Where(ap => ap.start.Month == CurrentTime.Month);
+                
                 foreach (var ap in weekQuery)
                 {
                     if (DaysOfCurrentWeek(ap.start.Day))
@@ -335,9 +334,11 @@ namespace SchedulingForms
             }
             else if (month_Radio.Checked)
             {
+                
                 var monthQuery = ent.appointments
                                     .Where(ap => ap.userId == ActiveUser.userId)
                                     .Where(ap => ap.start.Month == CurrentTime.Month);
+                
                 ForEachListItem(monthQuery, ap => userAppointments.Add(ap));
                 ChangeTimeZone();
             }
@@ -350,8 +351,17 @@ namespace SchedulingForms
 
             foreach (var item in userAppointments)
             {
-                item.start = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(item.start, TimeZoneInfo.Local.Id);
-                item.end = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(item.end, TimeZoneInfo.Local.Id);
+                if (item.start.Kind == DateTimeKind.Unspecified || item.start.Kind == DateTimeKind.Utc)
+                {
+                    item.start = DateTime.SpecifyKind(item.start, DateTimeKind.Utc).ToLocalTime();
+                }
+
+                if (item.end.Kind == DateTimeKind.Unspecified || item.end.Kind == DateTimeKind.Utc)
+                {
+                    item.end = DateTime.SpecifyKind(item.end, DateTimeKind.Utc).ToLocalTime();
+                }
+                
+                Debug.WriteLine($"{item.start} - {item.end}");
             }
         }
 

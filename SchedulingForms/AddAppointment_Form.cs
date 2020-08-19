@@ -5,6 +5,8 @@ using System.Data;
 using System.Diagnostics;
 using System.Windows.Forms;
 using static SchedulingForms.UserTracker;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace SchedulingForms
 {
@@ -12,13 +14,7 @@ namespace SchedulingForms
     {
         ScheduleEntities ent;
 
-        private DateTime startDate;
-        private DateTime endDate;
-
         int selectedCustomerID;
-
-        bool enteredStartTextBox = false;
-        bool enteredEndTextBox = false;
 
         public AddAppointment_Form()
         {
@@ -35,25 +31,7 @@ namespace SchedulingForms
 
         private void save_Button_Click(object sender, EventArgs e)
         {
-            if (!IsDateValid())
-            {
-                MessageBox.Show("Cannot schedule appointment before or on today.","Invalid Date");
-                return;
-            }
-            if (!AreHoursValid(startTime_TextBox.Text) || !AreHoursValid(endTime_TextBox.Text))
-            {
-                MessageBox.Show("Hours must be typed in '00:00' format in 24-hour time, between business hours (8AM-5PM)","Invalid Hours");
-                return;
-            }
-
-            startDate = SetDate(startTime_TextBox.Text);
-            endDate = SetDate(endTime_TextBox.Text);
-
-            if (IsThereOverlap())
-            {
-                MessageBox.Show("Appointment time cannot overlap with another appointment on the same day.","Appointment Overlap");
-                return;
-            }
+            if(!IsValid()) { return; }
 
             AddAppointment();
 
@@ -74,113 +52,6 @@ namespace SchedulingForms
         }
 
         ////Methods
-        //Make sure time is valid
-        private bool AreHoursValid(string input)
-        {
-            //Validate Time
-            var hourAndMinute = input.Split(':');
-
-            //if the format is NOT "00:00", return false
-            if (hourAndMinute.Length != 2 || hourAndMinute[0].Length != 2 || hourAndMinute[1].Length != 2)
-            {
-                return false;
-            }
-
-            var hour = Convert.ToInt32(hourAndMinute[0]);
-            var minute = Convert.ToInt32(hourAndMinute[1]);
-
-            //Make sure hour is between 8AM and 5PM, and make sure minute is valid
-            if (hour < 8 || hour > 17)
-            {
-                return false;
-            }
-            else if (minute < 0 || minute > 59)
-            {
-                return false;
-            }
-            else if (hour == 17 && minute > 0)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        //Make sure appointments do not overlap
-        private bool IsThereOverlap()
-        {
-            foreach (var ap in userAppointments)
-            {
-                if (ap.start.Day == startDate.Day)
-                {
-                    if (ap.start.Hour < endDate.Hour && startDate.Hour < ap.end.Hour)
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        //Set start and end Dates for the new appointment record
-        private DateTime SetDate(string input)
-        {
-            var hourAndMinute = input.Split(':');
-            var hour = Convert.ToInt32(hourAndMinute[0]);
-            var minute = Convert.ToInt32(hourAndMinute[1]);
-            var selectedDate = date_MonthCalendar.SelectionRange.Start;
-
-            var date = new DateTime(selectedDate.Year, selectedDate.Month, selectedDate.Day, hour, minute, 0);
-
-            return date;
-        }
-
-        //You cannot schedule an appointment before or on the current day.
-        private bool IsDateValid()
-        {
-            if (date_MonthCalendar.SelectionRange.Start <= CurrentTime)
-            {
-                return false;
-            }
-            return true;
-        }
-
-        //Adds a new appointment to the database
-        private void AddAppointment()
-        {
-            try
-            {
-                using (ent = new ScheduleEntities())
-                {
-                    var newAppointment = new appointment
-                    {
-                        customerId = selectedCustomerID,
-                        userId = ActiveUser.userId,
-                        title = title_TextBox.Text,
-                        description = description_TextBox.Text,
-                        location = location_TextBox.Text,
-                        contact = contact_TextBox.Text,
-                        type = type_TextBox.Text,
-                        url = url_TextBox.Text,
-                        start = startDate.ToUniversalTime(),
-                        end = endDate.ToUniversalTime(),
-                        createDate = CurrentTime,
-                        createdBy = ActiveUser.userName,
-                        lastUpdate = CurrentTime,
-                        lastUpdateBy = ActiveUser.userName
-                    };
-
-                    ent.appointments.Add(newAppointment);
-                    ent.SaveChanges();
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }  
-        }
-
         private void PopulateCustomerComboBox()
         {
 
@@ -202,31 +73,90 @@ namespace SchedulingForms
             }
         }
 
-        //Remove placeholder text on enter
-        private void startTime_TextBox_Enter(object sender, EventArgs e)
+        //Adds a new appointment to the database
+        private void AddAppointment()
         {
-            if (enteredStartTextBox)
+            try
             {
-                return;
+                using (ent = new ScheduleEntities())
+                {
+                    var newAppointment = new appointment
+                    {
+                        customerId = selectedCustomerID,
+                        userId = ActiveUser.userId,
+
+                        title = title_TextBox.Text,
+                        description = description_TextBox.Text,
+                        location = location_TextBox.Text,
+                        contact = contact_TextBox.Text,
+                        type = type_TextBox.Text,
+                        url = url_TextBox.Text,
+
+                        start = start_TimePicker.Value.ToUniversalTime(),
+                        end = end_TimePicker.Value.ToUniversalTime(),
+
+                        createDate = CurrentTime,
+                        createdBy = ActiveUser.userName,
+                        lastUpdate = CurrentTime,
+                        lastUpdateBy = ActiveUser.userName
+                    };
+
+                    ent.appointments.Add(newAppointment);
+                    ent.SaveChanges();
+                }
             }
-            else
+            catch (Exception)
             {
-                startTime_TextBox.Text = "";
-                enteredStartTextBox = true;
-            }
+
+                throw;
+            }  
         }
 
-        private void endTime_TextBox_Enter(object sender, EventArgs e)
+        //Validation
+        private bool IsValid()
         {
-            if (enteredEndTextBox)
+
+            if (!IsDateValid(start_TimePicker.Value, end_TimePicker.Value)) { return false; }
+
+            return true;
+        }
+
+
+
+        //Make sure days and hours are valid
+        private bool IsDateValid(DateTime start, DateTime end)
+        {
+            //Is the start day the same as end day?
+            if (start.Day != end.Day)
             {
-                return;
+                MessageBox.Show("Start and End days must be the same", "Invalid Days");
+                return false;
             }
-            else
+            //Do the hours fall within business hours?
+            if (start.Hour < 8 || start.Hour > 17 || end.Hour < 8 || end.Hour > 17)
             {
-                endTime_TextBox.Text = "";
-                enteredEndTextBox = true;
+                MessageBox.Show("Hours must be within business hours (8am - 5pm)", "Invalid Hours");
+                return false;
             }
+            //Is start hour earlier than the end hour?
+            if(start.Hour >= end.Hour)
+            {
+                MessageBox.Show("Start time cannot be after or same as end time","Invalid Hours");
+                return false;
+            }
+            //Is there overlap with another appointment?
+            foreach (var ap in userAppointments)
+            {
+                if (ap.start.Day == start.Day)
+                {
+                    if (ap.start.Hour < end.Hour && start.Hour < ap.end.Hour)
+                    {
+                        MessageBox.Show("Cannot overlap with an existing appointment", "Invalid Appointment Time");
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
     }
 }

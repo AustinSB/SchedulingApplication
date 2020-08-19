@@ -22,8 +22,7 @@ namespace SchedulingForms
         public Login_Form()
         {
             //CultureInfo.CurrentUICulture = new CultureInfo("es-ES", false);
-            Debug.WriteLine(UserTracker.CurrentTime.ToString());
-
+            
             InitializeComponent();
 
             

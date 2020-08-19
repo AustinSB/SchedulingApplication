@@ -74,7 +74,7 @@ namespace SchedulingForms
             description_TextBox.Text = AppointmentIndex.description;
 
             start_TimePicker.Value = AppointmentIndex.start;
-            end_TimePicker.Value = AppointmentIndex.end; 
+            end_TimePicker.Value = AppointmentIndex.end;
         }
 
         private void SetCustomerSelection(int id)
@@ -139,11 +139,12 @@ namespace SchedulingForms
             }
             catch (Exception)
             {
-                Debug.WriteLine("Something went wrong");
+                throw;
             }
         }
 
         //Validate
+        //Debug.WriteLine("Something went wrong");
 
 
     }

@@ -44,18 +44,15 @@
             this.contact_TextBox = new System.Windows.Forms.TextBox();
             this.type_TextBox = new System.Windows.Forms.TextBox();
             this.url_TextBox = new System.Windows.Forms.TextBox();
-            this.date_MonthCalendar = new System.Windows.Forms.MonthCalendar();
-            this.label10 = new System.Windows.Forms.Label();
-            this.startTime_TextBox = new System.Windows.Forms.TextBox();
-            this.endTime_TextBox = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.end_TimePicker = new System.Windows.Forms.DateTimePicker();
+            this.start_TimePicker = new System.Windows.Forms.DateTimePicker();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cancel_Button
             // 
-            this.cancel_Button.Location = new System.Drawing.Point(15, 375);
+            this.cancel_Button.Location = new System.Drawing.Point(15, 215);
             this.cancel_Button.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cancel_Button.Name = "cancel_Button";
             this.cancel_Button.Size = new System.Drawing.Size(75, 40);
@@ -66,7 +63,7 @@
             // 
             // save_Button
             // 
-            this.save_Button.Location = new System.Drawing.Point(175, 375);
+            this.save_Button.Location = new System.Drawing.Point(289, 215);
             this.save_Button.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.save_Button.Name = "save_Button";
             this.save_Button.Size = new System.Drawing.Size(75, 40);
@@ -190,83 +187,51 @@
             this.url_TextBox.Size = new System.Drawing.Size(150, 25);
             this.url_TextBox.TabIndex = 17;
             // 
-            // date_MonthCalendar
+            // end_TimePicker
             // 
-            this.date_MonthCalendar.Location = new System.Drawing.Point(614, 152);
-            this.date_MonthCalendar.MaxSelectionCount = 1;
-            this.date_MonthCalendar.Name = "date_MonthCalendar";
-            this.date_MonthCalendar.ShowTodayCircle = false;
-            this.date_MonthCalendar.TabIndex = 26;
-            this.date_MonthCalendar.TrailingForeColor = System.Drawing.Color.Silver;
+            this.end_TimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.end_TimePicker.Location = new System.Drawing.Point(614, 227);
+            this.end_TimePicker.Name = "end_TimePicker";
+            this.end_TimePicker.Size = new System.Drawing.Size(150, 25);
+            this.end_TimePicker.TabIndex = 65;
+            this.end_TimePicker.Value = new System.DateTime(2020, 8, 18, 17, 0, 0, 0);
             // 
-            // label10
+            // start_TimePicker
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(610, 130);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(123, 19);
-            this.label10.TabIndex = 30;
-            this.label10.Text = "Appointment Time";
+            this.start_TimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.start_TimePicker.Location = new System.Drawing.Point(614, 158);
+            this.start_TimePicker.Name = "start_TimePicker";
+            this.start_TimePicker.Size = new System.Drawing.Size(150, 25);
+            this.start_TimePicker.TabIndex = 64;
+            this.start_TimePicker.Value = new System.DateTime(2020, 8, 17, 8, 0, 0, 0);
             // 
-            // startTime_TextBox
+            // label9
             // 
-            this.startTime_TextBox.Location = new System.Drawing.Point(614, 375);
-            this.startTime_TextBox.Name = "startTime_TextBox";
-            this.startTime_TextBox.Size = new System.Drawing.Size(67, 25);
-            this.startTime_TextBox.TabIndex = 35;
-            this.startTime_TextBox.Text = "08:00";
-            this.startTime_TextBox.Enter += new System.EventHandler(this.startTime_TextBox_Enter);
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(610, 195);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(65, 19);
+            this.label9.TabIndex = 63;
+            this.label9.Text = "End Time";
             // 
-            // endTime_TextBox
+            // label11
             // 
-            this.endTime_TextBox.Location = new System.Drawing.Point(780, 375);
-            this.endTime_TextBox.Name = "endTime_TextBox";
-            this.endTime_TextBox.Size = new System.Drawing.Size(61, 25);
-            this.endTime_TextBox.TabIndex = 36;
-            this.endTime_TextBox.Text = "17:00";
-            this.endTime_TextBox.Enter += new System.EventHandler(this.endTime_TextBox_Enter);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(610, 345);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(71, 19);
-            this.label12.TabIndex = 37;
-            this.label12.Text = "Start Time";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(776, 345);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(65, 19);
-            this.label13.TabIndex = 38;
-            this.label13.Text = "End Time";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label8.Location = new System.Drawing.Point(660, 320);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(138, 15);
-            this.label8.TabIndex = 39;
-            this.label8.Text = "Time is in 24-hour format";
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(610, 130);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(71, 19);
+            this.label11.TabIndex = 62;
+            this.label11.Text = "Start Time";
             // 
             // AddAppointment_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(924, 431);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.endTime_TextBox);
-            this.Controls.Add(this.startTime_TextBox);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.date_MonthCalendar);
+            this.ClientSize = new System.Drawing.Size(824, 291);
+            this.Controls.Add(this.end_TimePicker);
+            this.Controls.Add(this.start_TimePicker);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.url_TextBox);
             this.Controls.Add(this.type_TextBox);
             this.Controls.Add(this.contact_TextBox);
@@ -310,12 +275,9 @@
         private System.Windows.Forms.TextBox contact_TextBox;
         private System.Windows.Forms.TextBox type_TextBox;
         private System.Windows.Forms.TextBox url_TextBox;
-        private System.Windows.Forms.MonthCalendar date_MonthCalendar;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox startTime_TextBox;
-        private System.Windows.Forms.TextBox endTime_TextBox;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DateTimePicker end_TimePicker;
+        private System.Windows.Forms.DateTimePicker start_TimePicker;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label11;
     }
 }
