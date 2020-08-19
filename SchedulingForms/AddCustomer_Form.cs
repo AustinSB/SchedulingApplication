@@ -314,7 +314,6 @@ namespace SchedulingForms
         {
             if (!IsComboBoxItemSelected(cityID_ComboBox, "City ID")) { return false; }
             if (!DoesTextBoxHaveValue(address1_TextBox.Text, "Address 1")) { return false; }
-            if (!DoesTextBoxHaveValue(address2_TextBox.Text, "Address 2")) { return false; }
             if (!IsPhoneValid(phone_TextBox.Text)) { return false; }
             if (!IsPostalValid(postal_TextBox.Text)) { return false; }
             return true;
