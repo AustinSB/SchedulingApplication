@@ -65,9 +65,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.sql_TextBox = new System.Windows.Forms.RichTextBox();
-            this.sql_Button = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.addressBindingSource)).BeginInit();
             this.panel2.SuspendLayout();
@@ -85,7 +82,7 @@
             // 
             // save_Button
             // 
-            this.save_Button.Location = new System.Drawing.Point(150, 292);
+            this.save_Button.Location = new System.Drawing.Point(150, 344);
             this.save_Button.Name = "save_Button";
             this.save_Button.Size = new System.Drawing.Size(75, 40);
             this.save_Button.TabIndex = 8;
@@ -95,7 +92,7 @@
             // 
             // cancel_Button
             // 
-            this.cancel_Button.Location = new System.Drawing.Point(16, 292);
+            this.cancel_Button.Location = new System.Drawing.Point(12, 344);
             this.cancel_Button.Name = "cancel_Button";
             this.cancel_Button.Size = new System.Drawing.Size(75, 40);
             this.cancel_Button.TabIndex = 9;
@@ -133,6 +130,7 @@
             // active_Radio
             // 
             this.active_Radio.AutoSize = true;
+            this.active_Radio.Checked = true;
             this.active_Radio.Location = new System.Drawing.Point(3, 3);
             this.active_Radio.Name = "active_Radio";
             this.active_Radio.Size = new System.Drawing.Size(47, 23);
@@ -148,7 +146,6 @@
             this.notActive_Radio.Name = "notActive_Radio";
             this.notActive_Radio.Size = new System.Drawing.Size(45, 23);
             this.notActive_Radio.TabIndex = 1;
-            this.notActive_Radio.TabStop = true;
             this.notActive_Radio.Text = "No";
             this.notActive_Radio.UseVisualStyleBackColor = true;
             // 
@@ -176,7 +173,7 @@
             // 
             // addAddress_Button
             // 
-            this.addAddress_Button.Location = new System.Drawing.Point(119, 259);
+            this.addAddress_Button.Location = new System.Drawing.Point(94, 275);
             this.addAddress_Button.Name = "addAddress_Button";
             this.addAddress_Button.Size = new System.Drawing.Size(125, 30);
             this.addAddress_Button.TabIndex = 20;
@@ -191,7 +188,7 @@
             this.panel2.Controls.Add(this.countryName_TextBox);
             this.panel2.Controls.Add(this.label10);
             this.panel2.Controls.Add(this.label9);
-            this.panel2.Location = new System.Drawing.Point(762, 278);
+            this.panel2.Location = new System.Drawing.Point(540, 224);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(275, 160);
             this.panel2.TabIndex = 32;
@@ -240,16 +237,16 @@
             this.panel3.Controls.Add(this.label8);
             this.panel3.Controls.Add(this.label7);
             this.panel3.Controls.Add(this.label6);
-            this.panel3.Location = new System.Drawing.Point(762, 18);
+            this.panel3.Location = new System.Drawing.Point(540, 18);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(275, 250);
+            this.panel3.Size = new System.Drawing.Size(275, 200);
             this.panel3.TabIndex = 31;
             // 
             // addCity_Button
             // 
-            this.addCity_Button.Location = new System.Drawing.Point(95, 187);
+            this.addCity_Button.Location = new System.Drawing.Point(95, 153);
             this.addCity_Button.Name = "addCity_Button";
-            this.addCity_Button.Size = new System.Drawing.Size(121, 30);
+            this.addCity_Button.Size = new System.Drawing.Size(125, 30);
             this.addCity_Button.TabIndex = 5;
             this.addCity_Button.Text = "Add City";
             this.addCity_Button.UseVisualStyleBackColor = true;
@@ -265,7 +262,7 @@
             // countryID_ComboBox
             // 
             this.countryID_ComboBox.FormattingEnabled = true;
-            this.countryID_ComboBox.Location = new System.Drawing.Point(95, 132);
+            this.countryID_ComboBox.Location = new System.Drawing.Point(95, 113);
             this.countryID_ComboBox.Name = "countryID_ComboBox";
             this.countryID_ComboBox.Size = new System.Drawing.Size(125, 25);
             this.countryID_ComboBox.TabIndex = 3;
@@ -283,7 +280,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 132);
+            this.label7.Location = new System.Drawing.Point(3, 113);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(77, 19);
             this.label7.TabIndex = 1;
@@ -300,28 +297,32 @@
             // 
             // phone_TextBox
             // 
-            this.phone_TextBox.Location = new System.Drawing.Point(119, 211);
+            this.phone_TextBox.Location = new System.Drawing.Point(94, 227);
             this.phone_TextBox.Name = "phone_TextBox";
             this.phone_TextBox.Size = new System.Drawing.Size(125, 25);
             this.phone_TextBox.TabIndex = 28;
+            this.phone_TextBox.Text = "##########";
+            this.phone_TextBox.TextChanged += new System.EventHandler(this.phone_TextBox_TextChanged);
             // 
             // postal_TextBox
             // 
-            this.postal_TextBox.Location = new System.Drawing.Point(119, 174);
+            this.postal_TextBox.Location = new System.Drawing.Point(94, 190);
             this.postal_TextBox.Name = "postal_TextBox";
             this.postal_TextBox.Size = new System.Drawing.Size(125, 25);
             this.postal_TextBox.TabIndex = 27;
+            this.postal_TextBox.Text = "#####";
+            this.postal_TextBox.Enter += new System.EventHandler(this.postal_TextBox_Enter);
             // 
             // address2_TextBox
             // 
-            this.address2_TextBox.Location = new System.Drawing.Point(119, 91);
+            this.address2_TextBox.Location = new System.Drawing.Point(94, 107);
             this.address2_TextBox.Name = "address2_TextBox";
             this.address2_TextBox.Size = new System.Drawing.Size(125, 25);
             this.address2_TextBox.TabIndex = 24;
             // 
             // address1_TextBox
             // 
-            this.address1_TextBox.Location = new System.Drawing.Point(119, 54);
+            this.address1_TextBox.Location = new System.Drawing.Point(94, 70);
             this.address1_TextBox.Name = "address1_TextBox";
             this.address1_TextBox.Size = new System.Drawing.Size(125, 25);
             this.address1_TextBox.TabIndex = 22;
@@ -329,7 +330,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(34, 214);
+            this.label5.Location = new System.Drawing.Point(9, 230);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(48, 19);
             this.label5.TabIndex = 30;
@@ -338,7 +339,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(34, 174);
+            this.label1.Location = new System.Drawing.Point(9, 190);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(81, 19);
             this.label1.TabIndex = 29;
@@ -347,7 +348,7 @@
             // cityID_ComboBox
             // 
             this.cityID_ComboBox.FormattingEnabled = true;
-            this.cityID_ComboBox.Location = new System.Drawing.Point(119, 134);
+            this.cityID_ComboBox.Location = new System.Drawing.Point(94, 150);
             this.cityID_ComboBox.Name = "cityID_ComboBox";
             this.cityID_ComboBox.Size = new System.Drawing.Size(125, 25);
             this.cityID_ComboBox.TabIndex = 26;
@@ -356,7 +357,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(34, 134);
+            this.label11.Location = new System.Drawing.Point(9, 150);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(51, 19);
             this.label11.TabIndex = 25;
@@ -365,7 +366,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(34, 94);
+            this.label12.Location = new System.Drawing.Point(9, 110);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(70, 19);
             this.label12.TabIndex = 23;
@@ -374,7 +375,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(34, 54);
+            this.label13.Location = new System.Drawing.Point(9, 70);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(58, 19);
             this.label13.TabIndex = 21;
@@ -395,9 +396,9 @@
             this.panel4.Controls.Add(this.address2_TextBox);
             this.panel4.Controls.Add(this.label5);
             this.panel4.Controls.Add(this.address1_TextBox);
-            this.panel4.Location = new System.Drawing.Point(414, 18);
+            this.panel4.Location = new System.Drawing.Point(275, 18);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(317, 318);
+            this.panel4.Size = new System.Drawing.Size(259, 366);
             this.panel4.TabIndex = 33;
             // 
             // label14
@@ -409,41 +410,11 @@
             this.label14.TabIndex = 31;
             this.label14.Text = "Add New Address";
             // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(8, 392);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(268, 19);
-            this.label15.TabIndex = 34;
-            this.label15.Text = "Run SQL commands (for testing purposes)";
-            // 
-            // sql_TextBox
-            // 
-            this.sql_TextBox.Location = new System.Drawing.Point(12, 421);
-            this.sql_TextBox.Name = "sql_TextBox";
-            this.sql_TextBox.Size = new System.Drawing.Size(495, 96);
-            this.sql_TextBox.TabIndex = 35;
-            this.sql_TextBox.Text = "";
-            // 
-            // sql_Button
-            // 
-            this.sql_Button.Location = new System.Drawing.Point(513, 455);
-            this.sql_Button.Name = "sql_Button";
-            this.sql_Button.Size = new System.Drawing.Size(75, 62);
-            this.sql_Button.TabIndex = 36;
-            this.sql_Button.Text = "run sql";
-            this.sql_Button.UseVisualStyleBackColor = true;
-            this.sql_Button.Click += new System.EventHandler(this.sql_Button_Click);
-            // 
             // AddCustomer_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1111, 529);
-            this.Controls.Add(this.sql_Button);
-            this.Controls.Add(this.sql_TextBox);
-            this.Controls.Add(this.label15);
+            this.ClientSize = new System.Drawing.Size(838, 407);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);
@@ -510,8 +481,5 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.RichTextBox sql_TextBox;
-        private System.Windows.Forms.Button sql_Button;
     }
 }

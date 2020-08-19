@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static SchedulingForms.ValidateCustomers;
 
 namespace SchedulingForms
 {
@@ -20,6 +21,9 @@ namespace SchedulingForms
         int selectedAddressID;
         int selectedCityID;
         int selectedCountryID;
+
+        bool phoneTextChanged = false;
+        bool postalTextChanged = false;
 
         public AddCustomer_Form()
         {
@@ -45,6 +49,7 @@ namespace SchedulingForms
 
         private void save_Button_Click(object sender, EventArgs e)
         {
+            if (!IsNewCustomerValid()) { return; }
 
             using (ent = new ScheduleEntities())
             {//adds new customer
@@ -78,6 +83,8 @@ namespace SchedulingForms
     ////Address Controls
         private void addAddress_Button_Click(object sender, EventArgs e)
         {
+            if (!IsNewAddressValid()) { return; }
+
             try
             {
                 using (ent = new ScheduleEntities())
@@ -117,6 +124,8 @@ namespace SchedulingForms
     ////City Controls
         private void addCity_Button_Click(object sender, EventArgs e)
         {
+            if (!IsNewCityValid()) { return; }
+
             try
             {
                 using (ent = new ScheduleEntities())
@@ -154,6 +163,8 @@ namespace SchedulingForms
     ////Country Controls
         private void addCountry_Button_Click(object sender, EventArgs e)
         {
+            if (!IsNewCountryValid()) { return; }
+
             try
             {
                 using (ent = new ScheduleEntities())
@@ -273,32 +284,53 @@ namespace SchedulingForms
             countryID_ComboBox.ResetText();
         }
 
-
-    ////SQL Controls for testing purposes
-        private void sql_Button_Click(object sender, EventArgs e)
+        private void postal_TextBox_Enter(object sender, EventArgs e)
         {
-            var confirmSQL = MessageBox.Show("Run SQL Command?", "SQL", MessageBoxButtons.YesNo);
-
-            if (confirmSQL == DialogResult.Yes) 
+            if (!postalTextChanged)
             {
-                try
-                {
-                    using (ent = new ScheduleEntities())
-                    {
-                        string script = sql_TextBox.Text;
-                        ent.Database.ExecuteSqlCommand(script);
-
-                        PopulateAddressComboBox();
-                        PopulateCityComboBox();
-                    }
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("SQL Failed","Failed");
-                }
+                postal_TextBox.Text = "";
+                postalTextChanged = true;
             }
         }
 
+        private void phone_TextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (!phoneTextChanged)
+            {
+                phone_TextBox.Text = "";
+                phoneTextChanged = true;
+            }
+        }
 
+        //Validate
+        private bool IsNewCustomerValid()
+        {
+            if (!IsComboBoxItemSelected(addressID_ComboBox, "Address ID")) { return false; }
+            if (!DoesTextBoxHaveValue(name_TextBox.Text, "Customer Name")) { return false; }
+            return true;
+        }
+
+        private bool IsNewAddressValid()
+        {
+            if (!IsComboBoxItemSelected(cityID_ComboBox, "City ID")) { return false; }
+            if (!DoesTextBoxHaveValue(address1_TextBox.Text, "Address 1")) { return false; }
+            if (!DoesTextBoxHaveValue(address2_TextBox.Text, "Address 2")) { return false; }
+            if (!IsPhoneValid(phone_TextBox.Text)) { return false; }
+            if (!IsPostalValid(postal_TextBox.Text)) { return false; }
+            return true;
+        }
+
+        private bool IsNewCityValid()
+        {
+            if (!DoesTextBoxHaveValue(cityName_TextBox.Text, "City Name")) { return false; }
+            if (!IsComboBoxItemSelected(countryID_ComboBox, "Country ID")) { return false; }
+            return true;
+        }
+
+        private bool IsNewCountryValid()
+        {
+            if (!DoesTextBoxHaveValue(countryName_TextBox.Text, "Country Name")) { return false; }
+            return true;
+        }
     }
 }

@@ -64,13 +64,13 @@
             this.panel2.Location = new System.Drawing.Point(283, 44);
             this.panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(303, 388);
+            this.panel2.Size = new System.Drawing.Size(303, 258);
             this.panel2.TabIndex = 26;
             // 
             // lastUpdateBy_Label
             // 
             this.lastUpdateBy_Label.AutoSize = true;
-            this.lastUpdateBy_Label.Location = new System.Drawing.Point(126, 353);
+            this.lastUpdateBy_Label.Location = new System.Drawing.Point(125, 220);
             this.lastUpdateBy_Label.Name = "lastUpdateBy_Label";
             this.lastUpdateBy_Label.Size = new System.Drawing.Size(35, 19);
             this.lastUpdateBy_Label.TabIndex = 21;
@@ -79,7 +79,7 @@
             // lastUpdate_Label
             // 
             this.lastUpdate_Label.AutoSize = true;
-            this.lastUpdate_Label.Location = new System.Drawing.Point(126, 235);
+            this.lastUpdate_Label.Location = new System.Drawing.Point(125, 150);
             this.lastUpdate_Label.Name = "lastUpdate_Label";
             this.lastUpdate_Label.Size = new System.Drawing.Size(36, 19);
             this.lastUpdate_Label.TabIndex = 20;
@@ -88,7 +88,7 @@
             // createdBy_Label
             // 
             this.createdBy_Label.AutoSize = true;
-            this.createdBy_Label.Location = new System.Drawing.Point(126, 118);
+            this.createdBy_Label.Location = new System.Drawing.Point(125, 80);
             this.createdBy_Label.Name = "createdBy_Label";
             this.createdBy_Label.Size = new System.Drawing.Size(35, 19);
             this.createdBy_Label.TabIndex = 19;
@@ -97,7 +97,7 @@
             // created_Label
             // 
             this.created_Label.AutoSize = true;
-            this.created_Label.Location = new System.Drawing.Point(126, 7);
+            this.created_Label.Location = new System.Drawing.Point(125, 10);
             this.created_Label.Name = "created_Label";
             this.created_Label.Size = new System.Drawing.Size(36, 19);
             this.created_Label.TabIndex = 18;
@@ -106,7 +106,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 7);
+            this.label5.Location = new System.Drawing.Point(5, 10);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(60, 19);
             this.label5.TabIndex = 14;
@@ -115,7 +115,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 118);
+            this.label6.Location = new System.Drawing.Point(5, 80);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(79, 19);
             this.label6.TabIndex = 15;
@@ -124,7 +124,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 353);
+            this.label8.Location = new System.Drawing.Point(5, 220);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(105, 19);
             this.label8.TabIndex = 17;
@@ -133,7 +133,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 235);
+            this.label7.Location = new System.Drawing.Point(5, 150);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(86, 19);
             this.label7.TabIndex = 16;
@@ -164,13 +164,13 @@
             this.notActive_Radio.Name = "notActive_Radio";
             this.notActive_Radio.Size = new System.Drawing.Size(45, 23);
             this.notActive_Radio.TabIndex = 1;
-            this.notActive_Radio.TabStop = true;
             this.notActive_Radio.Text = "No";
             this.notActive_Radio.UseVisualStyleBackColor = true;
             // 
             // active_Radio
             // 
             this.active_Radio.AutoSize = true;
+            this.active_Radio.Checked = true;
             this.active_Radio.Location = new System.Drawing.Point(3, 3);
             this.active_Radio.Name = "active_Radio";
             this.active_Radio.Size = new System.Drawing.Size(47, 23);
@@ -208,7 +208,7 @@
             // 
             // cancel_Button
             // 
-            this.cancel_Button.Location = new System.Drawing.Point(16, 392);
+            this.cancel_Button.Location = new System.Drawing.Point(16, 264);
             this.cancel_Button.Name = "cancel_Button";
             this.cancel_Button.Size = new System.Drawing.Size(75, 40);
             this.cancel_Button.TabIndex = 29;
@@ -218,7 +218,7 @@
             // 
             // save_Button
             // 
-            this.save_Button.Location = new System.Drawing.Point(147, 392);
+            this.save_Button.Location = new System.Drawing.Point(147, 264);
             this.save_Button.Name = "save_Button";
             this.save_Button.Size = new System.Drawing.Size(75, 40);
             this.save_Button.TabIndex = 28;
@@ -238,7 +238,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(598, 453);
+            this.ClientSize = new System.Drawing.Size(598, 332);
             this.Controls.Add(this.addressID_ComboBox);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label4);

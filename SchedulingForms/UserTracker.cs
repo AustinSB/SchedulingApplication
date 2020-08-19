@@ -16,7 +16,6 @@ namespace SchedulingForms
         static public BindingList<customer> userCustomers { get; set; } = new BindingList<customer>();
 
         static private DateTime currentTime = DateTime.Now;
-        //static private DateTime currentTime = DateTime.UtcNow;
 
         static public DateTime CurrentTime
         {
@@ -52,8 +51,5 @@ namespace SchedulingForms
         {
             activeUser = active;
         }
-
-        
-
     }
 }

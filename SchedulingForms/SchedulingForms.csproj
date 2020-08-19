@@ -173,6 +173,8 @@
       <DependentUpon>UserMenu_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="UserTracker.cs" />
+    <Compile Include="ValidateAppointment.cs" />
+    <Compile Include="ValidateCustomers.cs" />
     <EmbeddedResource Include="AddAppointment_Form.resx">
       <DependentUpon>AddAppointment_Form.cs</DependentUpon>
     </EmbeddedResource>

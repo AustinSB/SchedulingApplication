@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static SchedulingForms.UserTracker;
+using static SchedulingForms.ValidateCustomers;
 
 namespace SchedulingForms
 {
@@ -44,6 +45,8 @@ namespace SchedulingForms
 
         private void save_Button_Click(object sender, EventArgs e)
         {
+            if (!IsValid()) { return; }
+
             using(ent = new ScheduleEntities())
             {
                 //update record in the table
@@ -126,6 +129,15 @@ namespace SchedulingForms
                 return false;
             }
             return false;
+        }
+
+        //Validate
+        private bool IsValid()
+        {
+            if (!IsComboBoxItemSelected(addressID_ComboBox, "Address ID")) { return false; }
+            if (!DoesTextBoxHaveValue(name_TextBox.Text, "Customer Name")) { return false; }
+            
+            return true;
         }
     }
 }

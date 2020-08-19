@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static SchedulingForms.UserTracker;
 
 namespace SchedulingForms
 {
@@ -38,11 +39,6 @@ namespace SchedulingForms
                     userList.Add($"{u.userId} - Username: {u.userName}");
                 }
 
-                var apptQuery = from ap in ent.appointments
-                                orderby ap.start
-                                select ap;
-
-
                 foreach (var u in userList)
                 {
                     display_TextBox.AppendText($"--------------------------------------------------");
@@ -53,13 +49,23 @@ namespace SchedulingForms
 
                     display_TextBox.AppendText($"--------------------------------------------------");
                     display_TextBox.AppendText(Environment.NewLine);
-
-                    foreach (var ap in apptQuery)
+                    
+                    foreach (var ap in userAppointments)
                     {
                         var uid = Convert.ToInt32(char.GetNumericValue(u.ToString().First()));
 
                         if (uid == ap.userId)
                         {
+                            if (ap.start.Kind == DateTimeKind.Unspecified || ap.start.Kind == DateTimeKind.Utc)
+                            {
+                                ap.start = DateTime.SpecifyKind(ap.start, DateTimeKind.Utc).ToLocalTime();
+                            }
+
+                            if (ap.end.Kind == DateTimeKind.Unspecified || ap.end.Kind == DateTimeKind.Utc)
+                            {
+                                ap.end = DateTime.SpecifyKind(ap.end, DateTimeKind.Utc).ToLocalTime();
+                            }
+
                             display_TextBox.AppendText($"    Title: {ap.title} - {ap.type}");
                             display_TextBox.AppendText(Environment.NewLine);
 

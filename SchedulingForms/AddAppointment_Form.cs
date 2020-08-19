@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Windows.Forms;
 using static SchedulingForms.UserTracker;
+using static SchedulingForms.ValidateAppointment;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -14,7 +15,7 @@ namespace SchedulingForms
     {
         ScheduleEntities ent;
 
-        int selectedCustomerID;
+        int selectedCustomerID = -1;
 
         public AddAppointment_Form()
         {
@@ -115,48 +116,20 @@ namespace SchedulingForms
         //Validation
         private bool IsValid()
         {
+            if (!IsDateValid(start_TimePicker.Value, end_TimePicker.Value, AppointmentIndex.appointmentId)) { return false; }
 
-            if (!IsDateValid(start_TimePicker.Value, end_TimePicker.Value)) { return false; }
+            if(!IsCutomerSelected(selectedCustomerID)) { return false; }
+
+            if (!DoesTextBoxHaveValue(title_TextBox.Text, "Title")) { return false; }
+            if (!DoesTextBoxHaveValue(location_TextBox.Text, "Location")) { return false; }
+            if (!DoesTextBoxHaveValue(contact_TextBox.Text, "Contact")) { return false; }
+            if (!DoesTextBoxHaveValue(type_TextBox.Text, "Type")) { return false; }
+            if (!DoesTextBoxHaveValue(url_TextBox.Text, "Url")) { return false; }
+            if (!DoesTextBoxHaveValue(description_TextBox.Text, "Description")) { return false; }
 
             return true;
         }
 
-
-
-        //Make sure days and hours are valid
-        private bool IsDateValid(DateTime start, DateTime end)
-        {
-            //Is the start day the same as end day?
-            if (start.Day != end.Day)
-            {
-                MessageBox.Show("Start and End days must be the same", "Invalid Days");
-                return false;
-            }
-            //Do the hours fall within business hours?
-            if (start.Hour < 8 || start.Hour > 17 || end.Hour < 8 || end.Hour > 17)
-            {
-                MessageBox.Show("Hours must be within business hours (8am - 5pm)", "Invalid Hours");
-                return false;
-            }
-            //Is start hour earlier than the end hour?
-            if(start.Hour >= end.Hour)
-            {
-                MessageBox.Show("Start time cannot be after or same as end time","Invalid Hours");
-                return false;
-            }
-            //Is there overlap with another appointment?
-            foreach (var ap in userAppointments)
-            {
-                if (ap.start.Day == start.Day)
-                {
-                    if (ap.start.Hour < end.Hour && start.Hour < ap.end.Hour)
-                    {
-                        MessageBox.Show("Cannot overlap with an existing appointment", "Invalid Appointment Time");
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
+        
     }
 }

@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static SchedulingForms.UserTracker;
+using static SchedulingForms.ValidateAppointment;
 
 namespace SchedulingForms
 {
@@ -35,7 +36,7 @@ namespace SchedulingForms
 
         private void save_Button_Click(object sender, EventArgs e)
         {
-            //
+            if (!IsValid()) { return; }
 
             UpdateAppointment();
 
@@ -53,18 +54,15 @@ namespace SchedulingForms
         private void customerID_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedCustomerID = Convert.ToInt32(char.GetNumericValue(customerID_ComboBox.SelectedItem.ToString().First()));
-            Debug.WriteLine($"{selectedCustomerID}");
         }
 
         ////Methods
-        
         //Fill the form with the data of the appointment that was selected for updating
         private void PopulateAppointmentUpdateForm()
         {
             SetCustomerSelection(AppointmentIndex.customerId);
 
             selectedCustomerID = Convert.ToInt32(char.GetNumericValue(customerID_ComboBox.SelectedItem.ToString().First()));
-            Debug.WriteLine($"{selectedCustomerID}");
 
             title_TextBox.Text = AppointmentIndex.title;
             location_TextBox.Text = AppointmentIndex.location;
@@ -143,9 +141,21 @@ namespace SchedulingForms
             }
         }
 
-        //Validate
-        //Debug.WriteLine("Something went wrong");
+        //Validation
+        private bool IsValid()
+        {
+            if (!IsDateValid(start_TimePicker.Value, end_TimePicker.Value, AppointmentIndex.appointmentId)) { return false; }
 
+            if (!IsCutomerSelected(selectedCustomerID)) { return false; }
 
+            if (!DoesTextBoxHaveValue(title_TextBox.Text, "Title")) { return false; }
+            if (!DoesTextBoxHaveValue(location_TextBox.Text, "Location")) { return false; }
+            if (!DoesTextBoxHaveValue(contact_TextBox.Text, "Contact")) { return false; }
+            if (!DoesTextBoxHaveValue(type_TextBox.Text, "Type")) { return false; }
+            if (!DoesTextBoxHaveValue(url_TextBox.Text, "Url")) { return false; }
+            if (!DoesTextBoxHaveValue(description_TextBox.Text, "Description")) { return false; }
+
+            return true;
+        }
     }
 }

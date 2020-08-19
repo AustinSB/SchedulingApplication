@@ -58,7 +58,6 @@ namespace SchedulingForms
             else
             {
                 AppointmentIndex = userAppointments[e.RowIndex];
-                Debug.WriteLine($"AppointmentTest: {AppointmentIndex.appointmentId} - {AppointmentIndex.type}");
             }
         }
 
@@ -157,7 +156,6 @@ namespace SchedulingForms
             else
             {
                 CustomerIndex = userCustomers[e.RowIndex];
-                Debug.WriteLine($"CustomerTest: {CustomerIndex.customerId} - {CustomerIndex.customerName}");
             }
         }
 
@@ -347,8 +345,6 @@ namespace SchedulingForms
         //Changes the appointment datetimes to local time
         private void ChangeTimeZone()
         {
-            Debug.WriteLine($"{TimeZone.CurrentTimeZone.StandardName}");
-
             foreach (var item in userAppointments)
             {
                 if (item.start.Kind == DateTimeKind.Unspecified || item.start.Kind == DateTimeKind.Utc)
@@ -360,8 +356,6 @@ namespace SchedulingForms
                 {
                     item.end = DateTime.SpecifyKind(item.end, DateTimeKind.Utc).ToLocalTime();
                 }
-                
-                Debug.WriteLine($"{item.start} - {item.end}");
             }
         }
 
