@@ -116,7 +116,7 @@ namespace SchedulingForms
         //Validation
         private bool IsValid()
         {
-            if (!IsDateValid(start_TimePicker.Value, end_TimePicker.Value, AppointmentIndex.appointmentId)) { return false; }
+            if (!IsDateValid(start_TimePicker.Value, end_TimePicker.Value)) { return false; }
 
             if(!IsCutomerSelected(selectedCustomerID)) { return false; }
 

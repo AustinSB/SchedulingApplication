@@ -33,7 +33,7 @@ namespace SchedulingForms
         }
 
         //Validate Appointment Dates
-        static public bool IsDateValid(DateTime start, DateTime end, int id)
+        static public bool IsDateValid(DateTime start, DateTime end, int id = -1)
         {
             //Is the start date the same as end date?
             if (start.Date != end.Date)
